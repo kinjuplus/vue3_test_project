@@ -1,0 +1,13 @@
+export const getUserInfo = state => {
+    return state.userInfo;
+};
+
+export const hasAdminRole = state => {
+    if(state.userInfo.roles && state.userInfo.roles.length){
+        let found =  state.userInfo.roles.find(function(currentValue, index, arr){   
+            return currentValue.role_id == "ADMIN"
+        });
+        return (found)?true:false;
+    }
+    return false;
+};

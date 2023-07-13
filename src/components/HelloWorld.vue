@@ -120,7 +120,7 @@
 
 <script>
 export default {
-  name: "HelloWorld",
+  name: "HellWorld",
   props: {
     msg: String,
   },

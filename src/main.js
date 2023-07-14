@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap"
+import {LoadingPlugin} from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/css/index.css';
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -12,7 +14,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faAngleDown, faBookOpen, faChartArea, faColumns, faTable, faUser, faUserSecret, faEraser, faDotCircle } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faBookOpen, faChartArea, faColumns, faTable, faUser, faUserSecret, faEraser, faDotCircle, faBan } from '@fortawesome/free-solid-svg-icons'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faTachometerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -32,5 +34,5 @@ library.add(faChartArea)
 library.add(faTable)
 library.add(faEraser)
 library.add(faDotCircle)
-
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(store).use(router).mount("#app");
+library.add(faBan)
+createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(store).use(router).use(LoadingPlugin).mount("#app");

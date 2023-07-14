@@ -18,6 +18,8 @@
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li><a class="dropdown-item" href="#!">Settings</a></li>
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
+                        <li><a class="dropdown-item" @click="setLang">EN</a></li>
+                        <li><a class="dropdown-item" @click="setLang">TW</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <li><a class="dropdown-item" href="#!">Logout</a></li>
                     </ul>
@@ -28,9 +30,14 @@
 </template>
 
 <script>
-
+// import { useI18n } from 'vue-i18n'
 
 export default {
-  name: "HeaderView"
+  name: "HeaderView",
+  methods:{
+     setLang(e){
+       this.$store.dispatch('setLang', { language: e.target.textContent.toLowerCase() } );
+     }
+  }
 };
 </script>

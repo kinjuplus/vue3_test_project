@@ -121,8 +121,10 @@ async function verifyTicket(key, setUserInfo, CheckIP) {
               if (e.responseJSON.ErrorCode == "9002" || e.responseJSON.ErrorCode == "9003") {
                   if (ssoretry < 8) {
                       var url = baseAddr + '/form/Logon.html?url=' + encodeURIComponent(AddStringCase(DeleteStringCase(location.href, "Token"), "ssoretry", ++ssoretry));
-                      if (window.console)
+                      if (window.console){
                           console.log('url=', url);
+                      }    
+                      HideToken();    
                       window.location.replace(url);
                   }
                   else {

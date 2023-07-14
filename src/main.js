@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import "bootstrap"
 import {LoadingPlugin} from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
+import i18n from './plugins/i18n'
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -35,4 +36,4 @@ library.add(faTable)
 library.add(faEraser)
 library.add(faDotCircle)
 library.add(faBan)
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(store).use(router).use(LoadingPlugin).mount("#app");
+createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(store).use(router).use(LoadingPlugin).use(i18n).mount("#app");

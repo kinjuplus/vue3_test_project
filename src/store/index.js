@@ -7,6 +7,7 @@ import * as mutations  from './mutations';
 export default createStore({
   state: {
     userInfo:{},
+    lang:'tw'
   },
   mutations,
   actions,

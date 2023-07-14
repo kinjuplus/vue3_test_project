@@ -7,9 +7,9 @@
              <div id="layoutSidenav_content">
                   <main>
                     <div class="container-fluid px-4">
-                      <h1 class="mt-4">Query Project</h1>
+                      <h1 class="mt-4">{{ $t('queryProject') }}</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item active">Query Project</li>
+                            <li class="breadcrumb-item active">{{ $t('queryProject') }}</li>
                         </ol>
                         <div class="card">
                                  <div class="card-body">

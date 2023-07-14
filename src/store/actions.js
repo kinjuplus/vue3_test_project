@@ -9,4 +9,8 @@ export const loadUserInfo = ({commit}, { empNo }) => {
     }).catch(function (error) {
         console.log(error);
     }); 	
+};
+
+export const setLang = ({commit}, payload) => {
+    commit('setLang',payload);
 }; 

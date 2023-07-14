@@ -9,7 +9,7 @@
                                     <div class="sb-sidenav-menu-heading">Core</div>
                                     <a class="nav-link" href="index.html">
                                         <div class="sb-nav-link-icon"><font-awesome-icon :icon="['fas', 'tachometer-alt']" /></div>
-                                         <router-link :to="{name: 'queryProject'}">Query Project</router-link>
+                                         <router-link :to="{name: 'queryProject'}">{{ $t('queryProject') }}</router-link>
                                     </a>
                                     <div class="sb-sidenav-menu-heading">Interface</div>
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">

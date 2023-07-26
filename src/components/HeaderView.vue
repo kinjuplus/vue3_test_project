@@ -21,7 +21,7 @@
                         <li><a class="dropdown-item" @click="setLang">EN</a></li>
                         <li><a class="dropdown-item" @click="setLang">TW</a></li>
                         <li><hr class="dropdown-divider" /></li>
-                        <li><a class="dropdown-item" href="#!">Logout</a></li>
+                        <li><a class="dropdown-item" @click="logOut">Logout</a></li>
                     </ul>
                 </li>
             </ul>
@@ -37,6 +37,9 @@ export default {
   methods:{
      setLang(e){
        this.$store.dispatch('setLang', { language: e.target.textContent.toLowerCase() } );
+     },
+     logOut(){
+        this.$router.push('/logout');
      }
   }
 };

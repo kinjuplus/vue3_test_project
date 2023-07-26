@@ -170,7 +170,12 @@
             searchProjectResultColumns:[
                 { data: 'bu' },
                 { data: 'application' },
-                { data: 'product_id' },
+                { 
+                  data: 'product_id', 
+                  render: function (data) {
+                     return `<a href="/#/projectDetail/${data}" target="_blank">${data}</a>`;
+                  }
+                },
                 { data: 'model_name' },
                 { data: 'projectOwnerDisplay' },
                 { data: 'project_type' },

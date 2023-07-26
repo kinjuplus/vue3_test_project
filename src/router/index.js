@@ -4,6 +4,8 @@ import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import QueryProject from "../views/QueryProject.vue";
 import SearchEmployee from "../views/SearchEmployee.vue";
+import ProjectDetail from "../views/ProjectDetail.vue";
+import LogoutView from "../views/LogoutView.vue";
 import $ from 'jquery';
 import axios from "axios";
 import store from '@/store'
@@ -42,7 +44,7 @@ const routes = [
     path: "/login",
     name: "loginForm",
     redirect: () => {
-      window.location.href = `http://tsamv4athe.cminl.oa/form/Logon.html?url=${window.location.origin}&SysID=INNOPLM`;
+      window.location.href = `http://tsamv4athe.cminl.oa/form/Logon.html?url=${encodeURIComponent(window.location.origin)}&SysID=INNOPLM`;
     },
   },
   {
@@ -50,6 +52,24 @@ const routes = [
     name: "queryProject",
     component: QueryProject,
   },
+  {
+    path: "/projectDetail/:productId",
+    name: "projectDetail",
+    component: ProjectDetail,
+  },
+  {
+    path: "/logout",
+    name: "logout",
+    component: LogoutView,
+  },
+  {
+    path: "/doLogout",
+    name: "logoutForm",
+    redirect: () => {
+      window.location.href = `http://tsamv4athe.cminl.oa/form/Logout.html?url=${encodeURIComponent(window.location.origin)}&SysID=INNOPLM`;
+    },
+  }
+
   
 ];
 
@@ -103,20 +123,6 @@ async function verifyTicket(key, setUserInfo, CheckIP) {
           result = true;
       },
       error: function (e) {
-          /*
-          if (ssoretry < 8) {
-              var url = baseAddr + '/form/Logon.html?url=' + encodeURIComponent(AddStringCase(DeleteStringCase(location.href, "Token"), "ssoretry", ++ssoretry));
-              console.log('url=', url);
-              window.location.href = url;
-          }
-          else if (e.responseJSON) {
-              alert(e.responseJSON.Message);
-          }
-          else {
-              alert("verifyTicket Unknown Error!");
-          }
-          */
-
           if (e.responseJSON) {
               if (e.responseJSON.ErrorCode == "9002" || e.responseJSON.ErrorCode == "9003") {
                   if (ssoretry < 8) {
@@ -124,8 +130,8 @@ async function verifyTicket(key, setUserInfo, CheckIP) {
                       if (window.console){
                           console.log('url=', url);
                       }    
-                      HideToken();    
                       window.location.replace(url);
+                      HideToken();
                   }
                   else {
                       alert(e.responseJSON.Message);
@@ -235,6 +241,14 @@ function getCookie(name) {
       return parts.pop().split(';').shift();
 }
 
+function getParameterByName(name, url = window.location.href) {
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+}
 
 
 

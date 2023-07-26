@@ -11,6 +11,11 @@ export const loadUserInfo = ({commit}, { empNo }) => {
     }); 	
 };
 
+export const clearUserInfo = ({commit}) => {
+    commit('setUserInfo', null);
+};
+
+
 export const setLang = ({commit}, payload) => {
     commit('setLang',payload);
 }; 

@@ -7,7 +7,7 @@ import "bootstrap"
 import {LoadingPlugin} from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/css/index.css';
 import i18n from './plugins/i18n'
-
+import moment from 'moment'
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 
@@ -15,7 +15,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 /* import specific icons */
-import { faAngleDown, faBookOpen, faChartArea, faColumns, faTable, faUser, faUserSecret, faEraser, faDotCircle, faBan } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faBookOpen, faChartArea, faColumns, faTable, faUser, faUserSecret, faEraser, faDotCircle, faBan, faFolder } from '@fortawesome/free-solid-svg-icons'
 import { faPhone } from '@fortawesome/free-solid-svg-icons'
 import { faTachometerAlt } from '@fortawesome/free-solid-svg-icons'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -36,4 +36,17 @@ library.add(faTable)
 library.add(faEraser)
 library.add(faDotCircle)
 library.add(faBan)
-createApp(App).component('font-awesome-icon', FontAwesomeIcon).use(store).use(router).use(LoadingPlugin).use(i18n).mount("#app");
+library.add(faFolder)
+const app = createApp(App);
+
+app.config.globalProperties.$filters = {
+    formatDateStr(date, myFormat) {
+       if(date){
+         return moment(date).format(myFormat || 'YYYY-MM-DD');
+       }
+       return '';
+    },
+  }
+
+app.component('font-awesome-icon', FontAwesomeIcon)
+app.use(store).use(router).use(LoadingPlugin).use(i18n).mount("#app");

@@ -11241,3 +11241,27 @@ body {
   font-size: 0.75rem;
   border-radius: 0.375rem !important;
 }
+
+.red-alarm {
+  height: 25px;
+  width: 25px;
+  background-color: Red;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.yellow-alarm {
+  height: 25px;
+  width: 25px;
+  background-color: Gold;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.blue-alarm {
+  height: 25px;
+  width: 25px;
+  background-color: Blue;
+  border-radius: 50%;
+  display: inline-block;
+}

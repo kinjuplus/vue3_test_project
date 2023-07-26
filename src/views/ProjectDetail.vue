@@ -154,7 +154,7 @@
                                                                                              <tbody>
                                                                                                    <template v-if="projectTasks.length > 0">
                                                                                                        <tr v-for="task in projectTasks" :key="task.id">
-                                                                                                            <td>{{ task.getDisplayColor }}</td>
+                                                                                                            <td v-html="this.getDisplaySymbol(task.getDisplayColor)"></td>
                                                                                                             <td>{{ task.name }}</td> 
                                                                                                             <td>{{ $filters.formatDateStr(task.start_date) }}</td>
                                                                                                             <td>{{ $filters.formatDateStr(task.end_date) }}</td>
@@ -214,7 +214,9 @@ const ProjectRepository = Repository.get("projects");
          }
        },
        async mounted(){
+          let loader = this.$loading.show({ height:128, width: 128, color:"rgb(0,255,98)"});
           await this.getProject();
+          loader.hide();
           console.log(this.project);
           this.canWrite = this.determineCanWrite();
           this.npdpPhaseReportUrl = process.env.VUE_APP_PLM_URL+`/npdp/report/showProjectDeliverableDoc?productId=${this.project.product_id}&phase=${this.project.phase}`;
@@ -225,7 +227,13 @@ const ProjectRepository = Repository.get("projects");
                 const { data } = await ProjectRepository.getProjectById(this.$route.params.productId);       
                 this.project = data;
                 this.projectMemberRoles = this.project.memberRoleList;
-                this.projectTasks = this.project.taskList.filter(a=>!/^DR\d{1}$/.test(a.name) && a.name != this.project.product_id );
+                this.projectTasks = this.project.taskList.filter(a=>!/^DR\d{1}$/.test(a.name) && a.name != this.project.product_id  && a.children.length == 0);
+                for(let task of this.projectTasks.values()){
+                    let foundAssignemnt = this.project.assignments.filter(a=>a.task.id == task.id);
+                    if(foundAssignemnt.length){
+                        task['ownerDisplay'] = foundAssignemnt.map(a=>a.member.employee.name + '('+a.member.employee.emp_no+')').join(',');
+                    }
+                }
             },
             determineCanWrite(){
                 if(this.$store.getters.hasAdminRole || this.project.owner.emp_no == this.$store.getters.getUserInfo.emp_no ){
@@ -239,6 +247,17 @@ const ProjectRepository = Repository.get("projects");
                     }   
                 }
                 return false;
+            },
+            getDisplaySymbol(color){
+                if(color=="red"){
+                    return `<span class="red-alarm"></span>`;
+                }else if(color=="yellow"){
+                    return `<span class="yellow-alarm"></span>`;
+                }else if(color=="blue"){
+                    return `<span class="blue-alarm"></span>`;
+                }else{
+                    return "";
+                }
             }
             
        },
